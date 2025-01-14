@@ -20,7 +20,10 @@
       <td class="px-4 py-2 border border-gray-300"><%= employee.name %></td>
       <td class="px-4 py-2 border border-gray-300"><%= employee.position %></td>
       <td class="px-4 py-2 border border-gray-300"><%= employee.account_number %></td>
-      <td class="px-4 py-2 border border-gray-300">Salary Record </td>
+      <td class="px-4 py-2 border border-gray-300">
+        <%= link_to "add salary", new_employee_employee_salary_record_path(employee.id) %>
+        <%= link_to "show salaries",employee_employee_salary_records_path(employee.id) %>
+      </td>
     </tr>
 
   <% end %>

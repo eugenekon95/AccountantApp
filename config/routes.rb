@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  resources :employee_salary_records
   devise_for :users
   resources :departments, except:  [:destroy]
-  resources :employees
+  resources :employees do
+    resources :employee_salary_records
+  end
   resources :department_employees, only: [:new, :create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

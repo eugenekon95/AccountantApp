@@ -1,0 +1,25 @@
+<h1 class="text-2xl font-bold mb-4">Salary Records for <%= @employee.name %></h1>
+
+<table class="min-w-full border-collapse border border-gray-300 shadow-sm">
+  <thead>
+  <tr class="bg-gray-100">
+    <th class="border border-gray-300 p-2 text-left">Salary</th>
+    <th class="border border-gray-300 p-2 text-left">Paid On</th>
+    <th class="border border-gray-300 p-2">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @salary_records.each do |record| %>
+    <tr class="hover:bg-gray-50">
+      <td class="border border-gray-300 p-2"><%= number_to_currency(record.salary) %></td>
+      <td class="border border-gray-300 p-2"><%= record.paid_on %></td>
+      <td class="border border-gray-300 p-2 flex gap-2">
+        <%= link_to 'Edit', edit_employee_employee_salary_record_path(@employee, record), class: 'text-blue-500 hover:underline' %>
+        <%= link_to 'Delete', employee_employee_salary_record_path(@employee, record), method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-red-500 hover:underline' %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Salary Record', new_employee_employee_salary_record_path(@employee), class: 'mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600' %>
