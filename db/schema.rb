@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_14_095654) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_14_121858) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "department_employees", force: :cascade do |t|
+    t.bigint "department_id", null: false
+    t.bigint "employee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_department_employees_on_department_id"
+    t.index ["employee_id"], name: "index_department_employees_on_employee_id"
+  end
 
   create_table "departments", force: :cascade do |t|
     t.string "name"
@@ -40,4 +49,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_14_095654) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "department_employees", "departments"
+  add_foreign_key "department_employees", "employees"
 end

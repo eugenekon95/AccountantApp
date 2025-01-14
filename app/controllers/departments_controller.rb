@@ -1,4 +1,5 @@
 class DepartmentsController < ApplicationController
+  before_action :set_department, only: [  :edit, :update, :show]
   def index
     @departments = Department.all
   end
@@ -9,13 +10,28 @@ class DepartmentsController < ApplicationController
   def edit
 
   end
+
+  def show
+
+  end
+
   def create
     @department = Department.new(department_params)
+    if @department.save
+      redirect_to @department, notice: 'Listing was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def update
-    @department.update(department_params)
+    if @department.update(department_params)
+      redirect_to @department, notice: 'Department was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
+
 
   private
 
